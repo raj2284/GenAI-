@@ -2,7 +2,7 @@ import json
 import google.generativeai as genai
 from youtube_transcript_api import YouTubeTranscriptApi
 
-GOOGLE_API_KEY = "AIzaSyCJ3mrkXKWMNbnQbmjch58tBpYru75xu6Q"
+GOOGLE_API_KEY = "Mein Nahi bataunga"
 genai.configure(api_key=GOOGLE_API_KEY)
 
 quiz_no = int(input("Enter the number of questions you want in the quiz: "))
