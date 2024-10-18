@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Quiz Generator</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #edd267, #ffffff);
+            transition: background-color 0.3s;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #ffdd57;
+            padding: 15px 30px;
+        }
+
+        .navbar img {
+            height: 200px;
+            width: 400px;
+        }
+
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        h1 {
+            text-align: center;
+            color: #444;
+            font-size: 28px;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            box-shadow: 0 0 10px rgba(255, 221, 87, 0.6);
+            transition: box-shadow 0.3s ease;
+        }
+
+        input[type="text"]:focus,
+        input[type="number"]:focus {
+            box-shadow: 0 0 15px rgba(255, 221, 87, 1);
+            outline: none;
+        }
+
+        input[type="submit"] {
+            background-color: #ffdd57;
+            color: #fff;
+            border: none;
+            padding: 12px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s ease, transform 0.2s;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #ffc107;
+            transform: scale(1.05);
+        }
+
+        input[type="submit"]:active {
+            transform: scale(0.98);
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #ffdd57, #f9f7f1);
+            padding: 50px 30px;
+            text-align: center;
+            color: #333;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 40px;
+        }
+
+        .hero-button {
+            background-color: #ffdd57;
+            color: #fff;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        .hero-button:hover {
+            background-color: #ffc107;
+        }
+
+        body.dark-mode {
+            background-color: #2c2c2c;
+            color: #fff;
+        }
+
+        .navbar.dark-mode {
+            background-color: #333;
+        }
+
+        .hero.dark-mode {
+            background-color: #444;
+        }
+
+        input[type="text"].dark-mode,
+        input[type="number"].dark-mode {
+            background-color: #333;
+            color: #fff;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes floating {
+            0% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(15px);
+            }
+
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        .particle {
+            position: absolute;
+            background-color: rgba(255, 221, 87, 0.7);
+            border-radius: 50%;
+            width: 15px;
+            height: 15px;
+            animation: floating 6s ease-in-out infinite;
+        }
+
+        .particle:nth-child(2) {
+            width: 10px;
+            height: 10px;
+            animation-duration: 7s;
+        }
+
+        .particle:nth-child(3) {
+            width: 20px;
+            height: 20px;
+            animation-duration: 9s;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar">
+        <img src="./newimg.png" alt="Logo">
+    </nav>
+
+    <div class="hero">
+        <h1>Welcome to the AI-powered YouTube Quiz Generator</h1>
+        <p>Generate interactive quizzes and summaries from any YouTube video in seconds using cutting-edge AI.</p>
+        <div class="container">
+            <h1>YouTube Quiz Generator</h1>
+            <form action="/generate" method="POST">
+                <label for="youtubeLink">YouTube Video Link:</label>
+                <input type="text" id="youtubeLink" name="youtubeLink" placeholder="Enter the YouTube video link"
+                    required>
+
+                <label for="quizNo">Number of Quiz Questions:</label>
+                <input type="number" id="quizNo" name="quizNo" min="1" placeholder="Enter the number of quiz questions"
+                    required>
+
+                <input type="submit" value="Generate Summary and Quiz">
+            </form>
+        </div>
+    </div>
+
+
+
+    <script>
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            document.querySelector('.navbar').classList.toggle('dark-mode');
+            const inputs = document.querySelectorAll('input[type="text"], input[type="number"]');
+            inputs.forEach(input => input.classList.toggle('dark-mode'));
+        }
+
+        for (let i = 0; i < 30; i++) {
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+            particle.style.top = Math.random() * 100 + 'vh';
+            particle.style.left = Math.random() * 100 + 'vw';
+            document.body.appendChild(particle);
+        }
+    </script>
+</body>
+
+</html>
